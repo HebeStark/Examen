@@ -1,8 +1,51 @@
 <?php
 declare(strict_types=1);
 require_once 'Perro.php';
+class Catalogo extends Perro{
+    private array $perros = [];
 
-$perro1 = new Perro("Rocky", 5, "Grande", 30, "Pastor Alemán");
+    public function __construct(){
+        $this->perros[] = new Perro("Rocky", 5, "Grande", 30, "Pastor Alemán");
+        $this->perros[] = new Perro("Luna", 3, "Mediano", 20, "Bulldog Francés");
+        $this->perros[] = new Perro("Torito", 2, "Pequeño", 10, "Chihuahua");
+        $this->perros[] = new Perro("Max", 4, "Grande", 35, "Labrador Retriever");
+        $this->perros[] = new Perro("Milena", 2, "Pequeño", 8, "Schnauzer");
+    }
+
+    public function mostrarPerros(): void
+    {
+        echo "\nInformación de los Perros";
+        foreach ($this->perros as $perro) {
+            echo $perro->_toString() . "\n";
+        }
+    }
+
+    public function buscarPerrosPorTamanio(string $tamanio): array
+    {
+        $perrosBuscados = [];
+        foreach ($this->perros as $perro) {
+            if ($perro->getTamanio() == $tamanio) {
+                $perrosBuscados[] = $perro;
+            }
+        }
+        return $perrosBuscados;
+    }
+
+    public function buscarPerroMasViejo(): Perro
+    {
+        $perroMasViejo = $this->perros[0];
+        foreach ($this->perros as $perro) {
+            if ($perro->getEdad() > $perroMasViejo->getEdad()) {
+                $perroMasViejo = $perro;
+            }
+        }
+        return $perroMasViejo;
+    }
+}
+
+
+
+/*$perro1 = new Perro("Rocky", 5, "Grande", 30, "Pastor Alemán");
 $perro2 = new Perro("Luna", 3, "Mediano", 20, "Bulldog Francés");
 $perro3 = new Perro("Torito", 2, "Pequeño", 10, "Chihuahua");
 $perro4 = new Perro("Max", 4, "Grande", 35, "Labrador Retriever");
@@ -33,7 +76,7 @@ function buscarPerroMasViejo(array $perros): Perro {
         }
     }
     return $perroMasViejo;
-}
+}*/
 
 
 ?>
